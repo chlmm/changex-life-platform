@@ -4,9 +4,9 @@
   "version": "0.1.0",
   "identifier": "com.changex.life-platform",
   "build": {
-    "beforeDevCommand": "cd ../web && npm run dev",
+    "beforeDevCommand": "npm --prefix ../web run dev",
     "devUrl": "http://localhost:1420",
-    "beforeBuildCommand": "cd ../web && npm run build",
+    "beforeBuildCommand": "npm --prefix ../web run build",
     "frontendDist": "../web/dist"
   },
   "app": {
