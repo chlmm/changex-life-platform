@@ -3,6 +3,7 @@ name: Build Tauri App
 on:
   push:
     branches: [main, master]
+    tags: ['v*']
   pull_request:
     branches: [main, master]
   workflow_dispatch:
@@ -54,15 +55,18 @@ jobs:
             ${{ runner.os }}-cargo-
 
       - name: Install frontend dependencies
-        run: npm install
+        run: |
+          cd web
+          npm install
 
       - name: Build Tauri app
         uses: tauri-apps/tauri-action@v0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
+          projectPath: tauri
           tagName: ${{ github.ref_name }}
-          releaseName: 'Life Platform ${{ github.ref_name }}'
+          releaseName: 'Changex Life Platform ${{ github.ref_name }}'
           releaseBody: 'See the assets to download and install this version.'
           releaseDraft: true
           prerelease: false
@@ -73,9 +77,9 @@ jobs:
         if: matrix.platform == 'windows-latest'
         uses: actions/upload-artifact@v4
         with:
-          name: life-platform-windows-portable
+          name: changex-life-platform-windows-portable
           path: |
-            src-tauri/target/release/life-platform.exe
+            tauri/target/release/changex-life-platform.exe
           if-no-files-found: warn
 
       # 上传 macOS Portable 版本
@@ -83,11 +87,11 @@ jobs:
         if: matrix.platform == 'macos-latest'
         uses: actions/upload-artifact@v4
         with:
-          name: life-platform-macos-portable
+          name: changex-life-platform-macos-portable
           path: |
-            src-tauri/target/universal-apple-darwin/release/life-platform
-            src-tauri/target/aarch64-apple-darwin/release/life-platform
-            src-tauri/target/x86_64-apple-darwin/release/life-platform
+            tauri/target/universal-apple-darwin/release/changex-life-platform
+            tauri/target/aarch64-apple-darwin/release/changex-life-platform
+            tauri/target/x86_64-apple-darwin/release/chex-life-platform
           if-no-files-found: warn
 
       # 上传 Linux Portable 版本
@@ -95,9 +99,9 @@ jobs:
         if: matrix.platform == 'ubuntu-22.04'
         uses: actions/upload-artifact@v4
         with:
-          name: life-platform-linux-portable
+          name: changex-life-platform-linux-portable
           path: |
-            src-tauri/target/release/life-platform
+            tauri/target/release/changex-life-platform
           if-no-files-found: warn
 
   # 发布 Release（只在推送 tag 时触发）
