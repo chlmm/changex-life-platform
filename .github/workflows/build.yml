@@ -8,6 +8,9 @@ on:
     branches: [main, master]
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
   build:
     strategy:
@@ -49,7 +52,7 @@ jobs:
           path: |
             ~/.cargo/registry
             ~/.cargo/git
-            src-tauri/target
+            tauri/target
           key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
           restore-keys: |
             ${{ runner.os }}-cargo-
@@ -96,7 +99,7 @@ jobs:
           path: |
             tauri/target/universal-apple-darwin/release/changex-life-platform
             tauri/target/aarch64-apple-darwin/release/changex-life-platform
-            tauri/target/x86_64-apple-darwin/release/chex-life-platform
+            tauri/target/x86_64-apple-darwin/release/changex-life-platform
           if-no-files-found: warn
 
       # 上传 Linux Portable 版本
