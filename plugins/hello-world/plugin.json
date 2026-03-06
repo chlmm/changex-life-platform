@@ -1,0 +1,8 @@
+{
+  "name": "hello-world",
+  "version": "0.1.0",
+  "description": "A simple Hello World plugin demonstrating the Life Platform plugin system",
+  "author": "Life Platform Team",
+  "permissions": ["FileSystem"],
+  "entry_point": "index.js"
+}

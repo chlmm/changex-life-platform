@@ -1,0 +1,8 @@
+{
+  "name": "note-manager",
+  "version": "1.0.0",
+  "description": "A simple note management plugin - create, read, list and delete notes",
+  "author": "Life Platform Team",
+  "permissions": ["Read", "Write", "FileSystem"],
+  "entry_point": "index.js"
+}
